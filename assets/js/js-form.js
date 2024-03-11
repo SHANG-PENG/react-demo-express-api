@@ -66,7 +66,7 @@ function createForm() {
     submitButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
     submitButton.setAttribute("value", "Aldelo ePay");  
     // submitButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
-    submitButton.setAttribute("onclick", "window.open('https://i-vite-react-demo-git-epay-shangpeng.vercel.app/?token=abekedddddddd&payload=ddddddd****dddd&returnurl=http:/localhost:8002', '_self'); return false;"); 
+    submitButton.setAttribute("onclick", "postOrder()"); 
   
 
     formRowContainer = document.createElement("div");  
