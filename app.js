@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const path= require('path');
+const path = require('path');
 const fs = require('fs');
 
 // 服务端口号
@@ -13,11 +13,11 @@ app.get('/', (req, res) => {
     res.send('hello');
 });
 
-// 处理 GET 请求 /get ，参数 a，并且返回 a参数值
 app.get('/get', (req, res) => {
     const { a } = req.query;
     const scriptPath = path.join(__dirname, 'assets/js/js-form.js'); // 替换为你的脚本文件的路径  
 
+    rsaTesting();
     fs.readFile(scriptPath, 'utf8', (err, data) => {
         if (err) {
             console.error(`Error reading script file: ${err}`);
@@ -29,7 +29,6 @@ app.get('/get', (req, res) => {
 
 });
 
-// 处理 POST 请求 /post，接受 JSON 参数并返回相同的 JSON 参数
 app.post('/post', (req, res) => {
     const jsonData = req.body;
     res.json(jsonData);
