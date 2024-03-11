@@ -5,7 +5,7 @@ function createForm() {
     console.log("Current URL: " + currentURL, window.location);
 
     var form = document.createElement("form");  
-    form.setAttribute("style", "margin: 0 auto; width: 360px; border: 1px solid #ebebeb; padding: 15px; border-radius: 5px;");
+    form.setAttribute("style", "margin: 0 auto; width: 480px; border: 1px solid #ebebeb; padding: 15px; border-radius: 5px;");
     // form.setAttribute("action", "/submit-form"); // 设置表单提交的目标URL  
     // form.setAttribute("onclick", "alert('success'); return false"); // 设置表单提交的目标URL
     // form.setAttribute("method", "post"); // 设置表单提交方法  
@@ -18,6 +18,8 @@ function createForm() {
     merchantIDInput.setAttribute("name", "name");  
     merchantIDInput.setAttribute("autoComplete", "off");  
     merchantIDInput.setAttribute("placeholder", "Merchant ID");  
+    merchantIDInput.setAttribute("disabled", "true");
+    merchantIDInput.setAttribute("value", "72515C36-79A7-484B-B519-DFA80CB18A40");
   
     formRowContainer.appendChild(merchantIDInput)
     form.appendChild(formRowContainer);  
@@ -27,6 +29,8 @@ function createForm() {
     deviceIDInput.setAttribute("name", "deviceID");  
     deviceIDInput.setAttribute("autoComplete", "off");  
     deviceIDInput.setAttribute("placeholder", "Device ID");  
+    deviceIDInput.setAttribute("disabled", "true");
+    deviceIDInput.setAttribute("value", "94EC52BE-DB23-4F89-9254-FDDE201A68C0");
     
     formRowContainer = document.createElement("div");  
     formRowContainer.setAttribute("class", "form-group");
