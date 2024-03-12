@@ -11,7 +11,7 @@ function createForm() {
     // form.setAttribute("method", "post"); // 设置表单提交方法  
   
     var formRowContainer = document.createElement("div"); 
-    formRowContainer.setAttribute("class", "form-group");
+    formRowContainer.setAttribute("class", "epay-form-group");
 
     var merchantIDInput = document.createElement("input");  
     merchantIDInput.setAttribute("type", "text");  
@@ -33,7 +33,7 @@ function createForm() {
     deviceIDInput.setAttribute("value", "94EC52BE-DB23-4F89-9254-FDDE201A68C0");
     
     formRowContainer = document.createElement("div");  
-    formRowContainer.setAttribute("class", "form-group");
+    formRowContainer.setAttribute("class", "epay-form-group");
     formRowContainer.appendChild(deviceIDInput)
     form.appendChild(formRowContainer);  
 
@@ -44,7 +44,7 @@ function createForm() {
     // emailInput.setAttribute("placeholder", "Your Email");  
     
     // formRowContainer = document.createElement("div");  
-    // formRowContainer.setAttribute("class", "form-group");
+    // formRowContainer.setAttribute("class", "epay-form-group");
     // formRowContainer.appendChild(emailInput)
     // form.appendChild(formRowContainer);  
 
@@ -56,7 +56,7 @@ function createForm() {
     amountInput.setAttribute("placeholder", "Amount");  
     
     formRowContainer = document.createElement("div");  
-    formRowContainer.setAttribute("class", "form-group");
+    formRowContainer.setAttribute("class", "epay-form-group");
     formRowContainer.appendChild(amountInput)
     form.appendChild(formRowContainer);  
 
@@ -70,7 +70,7 @@ function createForm() {
   
 
     formRowContainer = document.createElement("div");  
-    formRowContainer.setAttribute("class", "form-group");
+    formRowContainer.setAttribute("class", "epay-form-group");
 
     formRowContainer.appendChild(submitButton)
     form.appendChild(formRowContainer);  
