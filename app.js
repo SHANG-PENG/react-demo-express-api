@@ -17,7 +17,6 @@ app.get('/get', (req, res) => {
     const { a } = req.query;
     const scriptPath = path.join(__dirname, 'assets/js/js-form.js'); // 替换为你的脚本文件的路径  
 
-    rsaTesting();
     fs.readFile(scriptPath, 'utf8', (err, data) => {
         if (err) {
             console.error(`Error reading script file: ${err}`);
