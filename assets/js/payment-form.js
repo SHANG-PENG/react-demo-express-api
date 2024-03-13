@@ -20,9 +20,8 @@ function createAldeloEPayPaymentForm() {
             storeName: data.get('storeName'),
             amount: data.get('amount'),
             cardNumber: data.get('CardNumber'),
-            cardholderName: data.get('CardholderName'),
             cardExpires: data.get('CardExpires'),
-            cardVerifyCode: data.get('CardholderName'),
+            cardVerifyCode: data.get('CardVeifyCodeName'),
             billingZipCode: data.get('billingZipCode'),
         }));
         xhr.onreadystatechange = function() {
@@ -101,19 +100,6 @@ function createAldeloEPayPaymentForm() {
     formRowContainer.appendChild(cardNumberInput);
     form.appendChild(formRowContainer);
 
-    // cardHolder Name
-    var cardholderNameInput = document.createElement("input");
-    cardholderNameInput.setAttribute("type", "text");
-    cardholderNameInput.setAttribute("name", "CardholderName");
-    // cardholderNameInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
-    cardholderNameInput.setAttribute("autoComplete", "off");
-    cardholderNameInput.setAttribute("placeholder", "Cardholder Name");
-
-    formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    formRowContainer.appendChild(cardholderNameInput);
-    form.appendChild(formRowContainer);
-
     // card expires
     var cardExpiresInput = document.createElement("input");
     cardExpiresInput.setAttribute("type", "text");
@@ -130,7 +116,7 @@ function createAldeloEPayPaymentForm() {
     // card verify code(CVV)
     var cardVerifyCodeInput = document.createElement("input");
     cardVerifyCodeInput.setAttribute("type", "text");
-    cardVerifyCodeInput.setAttribute("name", "CardholderName");
+    cardVerifyCodeInput.setAttribute("name", "CardVeifyCodeName");
     // cardVerifyCodeInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
     cardVerifyCodeInput.setAttribute("autoComplete", "off");
     cardVerifyCodeInput.setAttribute("placeholder", "Card Verify Code(CVV)");
