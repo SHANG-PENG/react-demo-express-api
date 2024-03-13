@@ -60,8 +60,8 @@ function createAldeloEPayPaymentForm() {
     tokenInput.setAttribute("disabled", "true");
     tokenInput.setAttribute("value", "72515C36-79A7-484B-B519-DFA80CB18A40");
 
-    formRowContainer.appendChild(tokenInput);
-    form.appendChild(formRowContainer);
+    // formRowContainer.appendChild(tokenInput);
+    form.appendChild(tokenInput);
 
     // storeName
     var storeNameInput = document.createElement("input");
