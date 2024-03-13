@@ -1,22 +1,19 @@
 function createAldeloEPayPaymentForm() {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
-    // form.setAttribute("action", "http://localhost:8080/submit-form");
+    // form.setAttribute("action", "http://localhost:8080/api/epay/submit-form");
     form.setAttribute("id", "aldelo-epay-form");
     form.setAttribute(
         "style",
         "margin: 0 auto; width: 480px; border: 1px solid #ebebeb; padding: 15px; border-radius: 5px;"
     );
-    // form.setAttribute("action", "/submit-form"); // 设置表单提交的目标URL
-    // form.setAttribute("onclick", "alert('success'); return false"); // 设置表单提交的目标URL
-    // form.setAttribute("method", "post"); // 设置表单提交方法
 
     form.addEventListener("submit", function (event) {
         console.log("submit -form...");
         event.preventDefault();
         var data = new FormData(form);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8080/submit-form', true);
+        xhr.open('POST', 'http://localhost:8080/api/epay/submit-form', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
             token: data.get('token'),
@@ -161,13 +158,13 @@ function createAldeloEPayPaymentForm() {
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute(
         "style",
-        "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;"
+        "padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;"
     );
     submitButton.setAttribute("value", "Pay");
     // submitButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
 
     formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-aldelo-epay-form-group");
+    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
 
     formRowContainer.appendChild(submitButton);
     form.appendChild(formRowContainer);
