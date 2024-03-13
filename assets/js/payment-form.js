@@ -9,20 +9,19 @@ function createAldeloEPayPaymentForm() {
     );
 
     form.addEventListener("submit", function (event) {
-        console.log("submit -form...");
         event.preventDefault();
         var data = new FormData(form);
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://localhost:8080/api/epay/submit-form', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
-            token: data.get('token'),
-            storeName: data.get('storeName'),
+            // token: data.get('token'),
+            // storeName: data.get('storeName'),
             amount: data.get('amount'),
             cardNumber: data.get('CardNumber'),
             cardExpires: data.get('CardExpires'),
             cardVerifyCode: data.get('CardVeifyCodeName'),
-            billingZipCode: data.get('billingZipCode'),
+            // billingZipCode: data.get('billingZipCode'),
         }));
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
@@ -60,18 +59,18 @@ function createAldeloEPayPaymentForm() {
     form.appendChild(tokenInput);
 
     // storeName
-    var storeNameInput = document.createElement("input");
-    storeNameInput.setAttribute("type", "text");
-    storeNameInput.setAttribute("name", "Store Name");
-    storeNameInput.setAttribute("autoComplete", "off");
-    storeNameInput.setAttribute("placeholder", "Store Name");
-    storeNameInput.setAttribute("disabled", "true");
-    storeNameInput.setAttribute("value", "Happy Grill");
+    // var storeNameInput = document.createElement("input");
+    // storeNameInput.setAttribute("type", "text");
+    // storeNameInput.setAttribute("name", "Store Name");
+    // storeNameInput.setAttribute("autoComplete", "off");
+    // storeNameInput.setAttribute("placeholder", "Store Name");
+    // storeNameInput.setAttribute("disabled", "true");
+    // storeNameInput.setAttribute("value", "Happy Grill");
 
-    formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    formRowContainer.appendChild(storeNameInput);
-    form.appendChild(formRowContainer);
+    // formRowContainer = document.createElement("div");
+    // formRowContainer.setAttribute("class", "aldelo-epay-form-group");
+    // formRowContainer.appendChild(storeNameInput);
+    // form.appendChild(formRowContainer);
 
     // amount
     var amountInput = document.createElement("input");
