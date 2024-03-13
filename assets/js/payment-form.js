@@ -125,18 +125,18 @@ function createAldeloEPayPaymentForm() {
     formRowContainer.appendChild(cardVerifyCodeInput);
     form.appendChild(formRowContainer);
 
-    // billing zip code
-    var billingZipCodeInput = document.createElement("input");
-    billingZipCodeInput.setAttribute("type", "text");
-    billingZipCodeInput.setAttribute("name", "billingZipCode");
-    // billingZipCodeInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
-    billingZipCodeInput.setAttribute("autoComplete", "off");
-    billingZipCodeInput.setAttribute("placeholder", "Billing Zip Code");
+    // // billing zip code
+    // var billingZipCodeInput = document.createElement("input");
+    // billingZipCodeInput.setAttribute("type", "text");
+    // billingZipCodeInput.setAttribute("name", "billingZipCode");
+    // // billingZipCodeInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
+    // billingZipCodeInput.setAttribute("autoComplete", "off");
+    // billingZipCodeInput.setAttribute("placeholder", "Billing Zip Code");
 
-    formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    formRowContainer.appendChild(billingZipCodeInput);
-    form.appendChild(formRowContainer);
+    // formRowContainer = document.createElement("div");
+    // formRowContainer.setAttribute("class", "aldelo-epay-form-group");
+    // formRowContainer.appendChild(billingZipCodeInput);
+    // form.appendChild(formRowContainer);
 
     // 创建提交按钮
     var submitButton = document.createElement("input");
