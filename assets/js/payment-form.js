@@ -13,7 +13,7 @@ function createAldeloEPayPaymentForm() {
 
         var data = new FormData(form);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:8080/api/epay/submit-form', true);
+        xhr.open('POST', '$$SubmitUrl$$', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
             // token: data.get('token'),
@@ -24,16 +24,22 @@ function createAldeloEPayPaymentForm() {
             cardVerifyCode: data.get('CardVeifyCodeName'),
             // billingZipCode: data.get('billingZipCode'),
         }));
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     console.log('Success:', xhr.responseText);
+                    if (typeof successCallback === 'function') {
+                        successCallback()
+                    }
                 } else {
                     console.error('Error:', xhr.responseText);
+                    if (typeof errorCallback === 'function') {
+                        errorCallback()
+                    }
                 }
             }
         };
-        
+
         // // 添加特殊字段
         // var specialField = document.createElement("input");
         // specialField.type = "hidden";
