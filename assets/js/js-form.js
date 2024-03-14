@@ -51,6 +51,7 @@ function createForm() {
     var amountInput = document.createElement("input");  
     amountInput.setAttribute("type", "number");  
     amountInput.setAttribute("name", "amount");  
+    amountInput.setAttribute("disabled", "true");  
     // amountInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
     amountInput.setAttribute("autoComplete", "off");  
     amountInput.setAttribute("placeholder", "Amount");  
@@ -64,9 +65,17 @@ function createForm() {
     var submitButton = document.createElement("input");  
     submitButton.setAttribute("type", "button");  
     submitButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
+    submitButton.setAttribute("value", "Redirect To Aldelo ePay");  
+    // submitButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
+    submitButton.setAttribute("onclick", "redirectToPay()"); 
+  
+
+    var submitButton = document.createElement("input");  
+    submitButton.setAttribute("type", "button");  
+    submitButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
     submitButton.setAttribute("value", "Aldelo ePay");  
     // submitButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
-    submitButton.setAttribute("onclick", "postOrder()"); 
+    submitButton.setAttribute("onclick", "switchPayForm()"); 
   
 
     formRowContainer = document.createElement("div");  

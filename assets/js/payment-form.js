@@ -161,7 +161,7 @@ function createAldeloEPayPaymentForm() {
     formRowContainer.appendChild(submitButton);
     form.appendChild(formRowContainer);
 
-    var container = document.getElementById("form-container");
+    var container = document.getElementById("aldelo-epay-form-container");
     container.setAttribute("class", "container");
     if (container) {
         container.appendChild(form);
