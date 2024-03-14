@@ -61,22 +61,27 @@ function createForm() {
     formRowContainer.appendChild(amountInput)
     form.appendChild(formRowContainer);  
 
-    // 创建提交按钮  
-    var submitButton = document.createElement("input");  
-    submitButton.setAttribute("type", "button");  
-    submitButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
-    submitButton.setAttribute("value", "Redirect To Aldelo ePay");  
-    // submitButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
-    submitButton.setAttribute("onclick", "redirectToPay()"); 
+    // 跳转到 ePay 支付页面  
+    var redirectButton = document.createElement("input");  
+    redirectButton.setAttribute("type", "button");  
+    redirectButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
+    redirectButton.setAttribute("value", "Redirect To Aldelo ePay");  
+    // redirectButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
+    redirectButton.setAttribute("onclick", "redirectToPay()"); 
   
+    formRowContainer = document.createElement("div");  
+    formRowContainer.setAttribute("class", "epay-form-group");
 
+    formRowContainer.appendChild(redirectButton)
+    form.appendChild(formRowContainer);  
+
+    // 渲染内嵌的 ePay payment form 表单
     var submitButton = document.createElement("input");  
     submitButton.setAttribute("type", "button");  
     submitButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
     submitButton.setAttribute("value", "Aldelo ePay");  
     // submitButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
     submitButton.setAttribute("onclick", "switchPayForm()"); 
-  
 
     formRowContainer = document.createElement("div");  
     formRowContainer.setAttribute("class", "epay-form-group");
