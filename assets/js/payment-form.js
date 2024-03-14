@@ -10,6 +10,7 @@ function createAldeloEPayPaymentForm() {
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
+
         var data = new FormData(form);
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://localhost:8080/api/epay/submit-form', true);
@@ -17,7 +18,7 @@ function createAldeloEPayPaymentForm() {
         xhr.send(JSON.stringify({
             // token: data.get('token'),
             // storeName: data.get('storeName'),
-            amount: data.get('amount'),
+            amount: data.get('Amount'),
             cardNumber: data.get('CardNumber'),
             cardExpires: data.get('CardExpires'),
             cardVerifyCode: data.get('CardVeifyCodeName'),
@@ -79,7 +80,7 @@ function createAldeloEPayPaymentForm() {
     amountInput.setAttribute("autoComplete", "off");
     amountInput.setAttribute("placeholder", "Amount");
     amountInput.setAttribute("disabled", "true");
-    amountInput.setAttribute("value", "$9.99");
+    amountInput.setAttribute("value", "$$Amount$$");
 
     formRowContainer = document.createElement("div");
     formRowContainer.setAttribute("class", "aldelo-epay-form-group");
