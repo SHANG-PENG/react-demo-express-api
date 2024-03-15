@@ -64,86 +64,48 @@ function createAldeloEPayPaymentForm() {
 
     // formRowContainer.appendChild(tokenInput);
     form.appendChild(tokenInput);
+    
+    function newFormRowContainer(opts = {}) {
+        if (!opts.name) return
 
-    // storeName
-    // var storeNameInput = document.createElement("input");
-    // storeNameInput.setAttribute("type", "text");
-    // storeNameInput.setAttribute("name", "Store Name");
-    // storeNameInput.setAttribute("autoComplete", "off");
-    // storeNameInput.setAttribute("placeholder", "Store Name");
-    // storeNameInput.setAttribute("disabled", "true");
-    // storeNameInput.setAttribute("value", "Happy Grill");
+        var optsType = opts.type ?? "text";
+        var frc = document.createElement("div");
+        frc.setAttribute("class", "aldelo-epay-form-group");
 
-    // formRowContainer = document.createElement("div");
-    // formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    // formRowContainer.appendChild(storeNameInput);
-    // form.appendChild(formRowContainer);
+        if (opts.label) {
+            var rLabel = document.createElement("label");
+            rLabel.setAttribute("for", opts.name);
+            rLabel.innerText = opts.label;
+            rLabel.setAttribute("style", "display: block; margin-bottom: 5px;");
+            frc.appendChild(rLabel);
+        }
 
-    // amount
-    var amountInput = document.createElement("input");
-    amountInput.setAttribute("type", "text");
-    amountInput.setAttribute("name", "Amount");
-    amountInput.setAttribute("autoComplete", "off");
-    amountInput.setAttribute("placeholder", "Amount");
-    amountInput.setAttribute("disabled", "true");
-    amountInput.setAttribute("value", "$$Amount$$");
+        var rInput = document.createElement("input");
+        rInput.setAttribute("type", optsType);
+        rInput.setAttribute("name", "CardNumber");
+        // rInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
+        rInput.setAttribute("autoComplete", "off");
+        rInput.setAttribute("placeholder", opts.isRequired ? "Required" : "Optional");
 
-    formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    formRowContainer.appendChild(amountInput);
-    form.appendChild(formRowContainer);
+        frc.appendChild(rInput);
 
-    // card number
-    var cardNumberInput = document.createElement("input");
-    cardNumberInput.setAttribute("type", "text");
-    cardNumberInput.setAttribute("name", "CardNumber");
-    // cardNumberInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
-    cardNumberInput.setAttribute("autoComplete", "off");
-    cardNumberInput.setAttribute("placeholder", "Credit Card Number");
+        var rSmall = document.createElement("small");
+        rSmall.setAttribute("class", "aldelo-epay-small");
+        rSmall.innerText = opts.error ?? "*error message*";
+        rSmall.setAttribute("style", "color: red; margin-top: 5px;");
 
-    formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    formRowContainer.appendChild(cardNumberInput);
-    form.appendChild(formRowContainer);
+        var rSmallContainer = document.createElement("div");
+        rSmallContainer.setAttribute("style", "width: 100%; padding-left: 3px;text-align: left;");
+        rSmallContainer.appendChild(rSmall);
 
-    // card expires
-    var cardExpiresInput = document.createElement("input");
-    cardExpiresInput.setAttribute("type", "text");
-    cardExpiresInput.setAttribute("name", "CardExpires");
-    // cardExpiresInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
-    cardExpiresInput.setAttribute("autoComplete", "off");
-    cardExpiresInput.setAttribute("placeholder", "Card Expires");
+        frc.appendChild(rSmallContainer);
 
-    formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    formRowContainer.appendChild(cardExpiresInput);
-    form.appendChild(formRowContainer);
+        return frc;
+    }
 
-    // card verify code(CVV)
-    var cardVerifyCodeInput = document.createElement("input");
-    cardVerifyCodeInput.setAttribute("type", "text");
-    cardVerifyCodeInput.setAttribute("name", "CardVeifyCodeName");
-    // cardVerifyCodeInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
-    cardVerifyCodeInput.setAttribute("autoComplete", "off");
-    cardVerifyCodeInput.setAttribute("placeholder", "Card Verify Code(CVV)");
-
-    formRowContainer = document.createElement("div");
-    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    formRowContainer.appendChild(cardVerifyCodeInput);
-    form.appendChild(formRowContainer);
-
-    // // billing zip code
-    // var billingZipCodeInput = document.createElement("input");
-    // billingZipCodeInput.setAttribute("type", "text");
-    // billingZipCodeInput.setAttribute("name", "billingZipCode");
-    // // billingZipCodeInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
-    // billingZipCodeInput.setAttribute("autoComplete", "off");
-    // billingZipCodeInput.setAttribute("placeholder", "Billing Zip Code");
-
-    // formRowContainer = document.createElement("div");
-    // formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-    // formRowContainer.appendChild(billingZipCodeInput);
-    // form.appendChild(formRowContainer);
+    form.appendChild(newFormRowContainer({ name: "CardNumber", label: 'Card Number', type: "text", isRequired: true, error: "*Card Number is required" }));
+    form.appendChild(newFormRowContainer({ name: "CardExpires", label: 'Card Expires', type: "text", isRequired: true, error: "*Card Expires is required" }));
+    form.appendChild(newFormRowContainer({ name: "CardVeifyCodeName", label: 'Card Verify Code(CVV)', type: "text", isRequired: true, error: "*Card Verify Code(CVV) is required" }));
 
     // 创建提交按钮
     var submitButton = document.createElement("input");
@@ -164,6 +126,13 @@ function createAldeloEPayPaymentForm() {
     var container = document.getElementById("aldelo-epay-form-container");
     container.setAttribute("class", "container");
     if (container) {
+        var amountTitle = document.createElement("h2");
+        amountTitle.innerText = "Amount: $$Amount$$";
+        formRowContainer = document.createElement("div");
+        formRowContainer.setAttribute("class", "aldelo-epay-form-group");
+        formRowContainer.appendChild(amountTitle);
+        container.appendChild(formRowContainer);
+
         container.appendChild(form);
     } else {
         console.error("Container element not found!");
