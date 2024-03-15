@@ -48,18 +48,18 @@ function createForm() {
     // formRowContainer.appendChild(emailInput)
     // form.appendChild(formRowContainer);  
 
-    var amountInput = document.createElement("input");  
-    amountInput.setAttribute("type", "number");  
-    amountInput.setAttribute("name", "amount");  
-    amountInput.setAttribute("disabled", "true");  
-    // amountInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
-    amountInput.setAttribute("autoComplete", "off");  
-    amountInput.setAttribute("placeholder", "Amount");  
+    // var amountInput = document.createElement("input");  
+    // amountInput.setAttribute("type", "number");  
+    // amountInput.setAttribute("name", "amount");  
+    // amountInput.setAttribute("disabled", "true");  
+    // // amountInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
+    // amountInput.setAttribute("autoComplete", "off");  
+    // amountInput.setAttribute("placeholder", "Amount");  
     
-    formRowContainer = document.createElement("div");  
-    formRowContainer.setAttribute("class", "epay-form-group");
-    formRowContainer.appendChild(amountInput)
-    form.appendChild(formRowContainer);  
+    // formRowContainer = document.createElement("div");  
+    // formRowContainer.setAttribute("class", "epay-form-group");
+    // formRowContainer.appendChild(amountInput)
+    // form.appendChild(formRowContainer);  
 
     // 跳转到 ePay 支付页面  
     var redirectButton = document.createElement("input");  
