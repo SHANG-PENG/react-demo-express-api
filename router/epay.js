@@ -3,6 +3,8 @@ var router = express.Router()
 var path = require('path');
 var fs = require('fs');
 
+var privateDecrypt = require('../common/rsa').privateDecrypt;
+
 var { getRandomInt } = require('../common/utility');
 
 router.get('/load-form', (req, res) => {
@@ -27,6 +29,9 @@ router.get('/load-form', (req, res) => {
 
 router.post('/submit-form', (req, res) => {
     const jsonData = req.body;
+    console.log('submit-form: ', jsonData);
+    var data = privateDecrypt(jsonData);
+    console.log('submit-form-decrypt: ', data);
     // 解密获取基本信息并校验
     res.send("ok");
 });

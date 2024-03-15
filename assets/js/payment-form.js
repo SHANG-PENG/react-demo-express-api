@@ -1,3 +1,42 @@
+
+var pk = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsyEUtkE/nwhK5LgaqhYd
+91iFrxajcuX3JUI6ShdEzXWIJAF+Y0mu3IVHZ63e03b/RC03G8DHPicLKAm6uc87
+5aD5zlTlCwcWu2QV6Zq1wkSHbp8yvaAptszJfMVkaBX7YoYRk5W4LulEoVacQr+v
+BfCEEI3eXyU+xLssc1ly22VhmmRMO4V8ZmGoFnMf0nBw6doNHdS1KrJ0AJyV++Pw
+7u8p3dlzEsWpmb47VANuIN8OuifWEJzUxd2o9PXvbeKIt/qDYdKGDh7ChG8dMtZX
+VShB9ggiBXP6Pz1XTqEOrPU8IEl/6tWPudkh1UMSJd0FWbZuvgL65agKvlfjVjnI
+iQIDAQAB
+-----END PUBLIC KEY-----`
+
+var pk2 = `-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAsyEUtkE/nwhK5LgaqhYd91iFrxajcuX3JUI6ShdEzXWIJAF+
+Y0mu3IVHZ63e03b/RC03G8DHPicLKAm6uc875aD5zlTlCwcWu2QV6Zq1wkSHbp8y
+vaAptszJfMVkaBX7YoYRk5W4LulEoVacQr+vBfCEEI3eXyU+xLssc1ly22VhmmRM
+O4V8ZmGoFnMf0nBw6doNHdS1KrJ0AJyV++Pw7u8p3dlzEsWpmb47VANuIN8OuifW
+EJzUxd2o9PXvbeKIt/qDYdKGDh7ChG8dMtZXVShB9ggiBXP6Pz1XTqEOrPU8IEl/
+6tWPudkh1UMSJd0FWbZuvgL65agKvlfjVjnIiQIDAQABAoIBABBurHO7sJZqMFSi
+/u8zcDRMjpbtQLk9l1p3pNk/ITSn34FOEcYR8FSSdWZxcMt9UxVyAGgvWxe8hS17
+FwIMnLYH+mKPLyO/1roCCHCRnLLhjnr7Z7A1jR4T0zf686cIvTLgkaQ0S90h0QXr
+6BHHe8rTsYnDOe8If6WUdhNu1TaDAv9gpGiKgSvUtF260HAW2v2B67kKzkfiXEwn
+vVknl6y+koTtHtfNxblcxw9C5v1mqrg+SSP/V4EfWB/4fn2F8xETRMLXSGThPxgJ
+k0JwlcUN0yTocFyv66JJqWCic8dAcEIIlCiRGF9V/joYM7/FbQ4cCgkxTxusLzmZ
+QBT8O7ECgYEA4/zeecKnvnl9coiDoSoGMkJic3gBVQj/Ogkd/8qs/202Ya4QGvA/
+obSwy15oYN+FaxXxRJ3aP5n1UG6mIInnGvYRqmrfrnpOlwk4/7xVm1iafPxAknaQ
+AZAJx9DOW9OMXus25/txQ1Wy3t8oYncyxfjxniUQBzzQw3gKfS3tJ2cCgYEAySNq
+EXE/b6Vx6XxBq4AT7bveFYTYWAMDnNGuNsWHTUxQZ0riOMFpWdu/lJPs4frDv0fa
+iH599mhsIAFuXK+sX1I/H+aYbnq0lAG9jeCfYlNEWblp/2oWi2lQBOst+c16Qhr6
+JL73P/BlugP3sOAuC3LG2kDrGp9VMj+jrsqbSo8CgYBf5iryzqVeop3ZAoFT1mh6
+1Z+x8GWnDjzFfbZHtUoluxun5N7TZgFuFKJVOSXwsbTeQYGWGkwGes1Mgu6QO1Gh
+7qWpqIDkVIAgWfnG4MKlsJRzRGwo74RNk/f5O+TBjW+7MXeMByEycKbnxrinCnqp
++bgwjGh8kuFBh4np89qQuwKBgQCaHrnCnb0W5nXPi7eiGuSqUD7OzFkdr0mQWxab
+v2V6dFRToYyQIpuAECLPTT3Atm5RXlR0LECGk+Lt70rKWI3DCHl4DzCTzxAZLPA7
+C3f1VopUGf+/h2G49zwqWK6E786TYqpzh6Ra6PB5xVqAvHZrrUnzqLS9VINqmlro
+rzSovwKBgHu3EQ8jfNwaE5Q1+ypnvWOM5yTuDhrV2+tPaYMfxLUSq1Tx+nw1BvhV
+/iNB1RBLnd2BAWoyze1OXU6l6j6Tozgd/R4zcMN5KdC1QJKuWtfZHREjBIx8uZce
+ZMbpselV5TudhrbwnXDALlfXJmsWnsTwvnMrab/SI+DnkSuFvy8/
+-----END RSA PRIVATE KEY-----`
+
 function createAldeloEPayPaymentForm() {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
@@ -58,44 +97,70 @@ function createAldeloEPayPaymentForm() {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        var data = new FormData(form);
-        var cardNumber = data.get('CardNumber'),
-            cardExpires = data.get('CardExpires'),
-            cardVerifyCodeName = data.get('CardVerifyCodeName');
+        const formData = new FormData(form);  
+        const dataToEncrypt = {};  
+        for (const [key, value] of formData.entries()) {  
+            dataToEncrypt[key] = value;  
+        }  
+        var cardNumber = formData.get('CardNumber'),
+            cardExpires = formData.get('CardExpires'),
+            cardVerifyCodeName = formData.get('CardVerifyCodeName');
 
-        var aaa = fnFormFieldValidation("CardNumber", cardNumber);
+            const encrypt = new JSEncrypt();  
+            encrypt.setPublicKey(pk);  
+            const encrypted = encrypt.encrypt(JSON.stringify(dataToEncrypt)); 
+
         // debugger
         if(!fnFormFieldValidation("CardNumber", cardNumber)) return false;
         if(!fnFormFieldValidation("CardExpires", cardExpires)) return false;
         if(!fnFormFieldValidation("CardVerifyCodeName", cardVerifyCodeName)) return false;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '$$SubmitUrl$$', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            // token: data.get('token'),
-            // storeName: data.get('storeName'),
-            amount: data.get('Amount'),
-            cardNumber: data.get('CardNumber'),
-            cardExpires: data.get('CardExpires'),
-            cardVerifyCode: data.get('CardVerifyCodeName'),
-            // billingZipCode: data.get('billingZipCode'),
-        }));
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    console.log('Success:', xhr.responseText);
-                    if (typeof successCallback === 'function') {
-                        successCallback()
-                    }
-                } else {
-                    console.error('Error:', xhr.responseText);
-                    if (typeof errorCallback === 'function') {
-                        errorCallback()
-                    }
-                }
-            }
-        };
+        console.log('encrypted:', encrypted)
+
+        const des = new JSEncrypt();
+        encrypt.setPrivateKey(pk2);
+        const decrypted = des.decrypt(encrypted);
+        console.log('decrypted:', decrypted)
+
+        fetch('$$SubmitUrl$$', {  
+            method: 'POST',  
+            headers: {  
+                'Content-Type': 'application/json'  
+            },  
+            body: JSON.stringify({ data: encrypted })  
+        })  
+        .then(response => response.json())  
+        .then(data => {
+
+            console.log(data)
+        })  
+        .catch(error => console.error('Error:', error));  
+
+
+        // var xhr = new XMLHttpRequest();
+        // xhr.open('POST', '$$SubmitUrl$$', true);
+        // xhr.setRequestHeader('Content-Type', 'application/json');
+        // xhr.send(JSON.stringify({
+        //     cardNumber: data.get('CardNumber'),
+        //     cardExpires: data.get('CardExpires'),
+        //     cardVerifyCode: data.get('CardVerifyCodeName'),
+        //     // billingZipCode: data.get('billingZipCode'),
+        // }));
+        // xhr.onreadystatechange = function () {
+        //     if (xhr.readyState === 4) {
+        //         if (xhr.status === 200) {
+        //             console.log('Success:', xhr.responseText);
+        //             if (typeof successCallback === 'function') {
+        //                 successCallback()
+        //             }
+        //         } else {
+        //             console.error('Error:', xhr.responseText);
+        //             if (typeof errorCallback === 'function') {
+        //                 errorCallback()
+        //             }
+        //         }
+        //     }
+        // };
 
         // // 添加特殊字段
         // var specialField = document.createElement("input");
@@ -110,17 +175,6 @@ function createAldeloEPayPaymentForm() {
 
     var formRowContainer = document.createElement("div");
     formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-
-    var tokenInput = document.createElement("input");
-    tokenInput.setAttribute("type", "hidden");
-    tokenInput.setAttribute("name", "token");
-    tokenInput.setAttribute("autoComplete", "off");
-    tokenInput.setAttribute("placeholder", "Token");
-    tokenInput.setAttribute("disabled", "true");
-    tokenInput.setAttribute("value", "72515C36-79A7-484B-B519-DFA80CB18A40");
-
-    // formRowContainer.appendChild(tokenInput);
-    form.appendChild(tokenInput);
 
     function newFormRowContainer(opts = {}) {
         if (!opts.name) return
@@ -171,7 +225,6 @@ function createAldeloEPayPaymentForm() {
         "padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;"
     );
     submitButton.setAttribute("value", "Pay");
-    // submitButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
 
     formRowContainer = document.createElement("div");
     formRowContainer.setAttribute("class", "aldelo-epay-form-group");
