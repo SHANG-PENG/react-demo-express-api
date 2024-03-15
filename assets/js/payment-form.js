@@ -8,10 +8,67 @@ function createAldeloEPayPaymentForm() {
         "margin: 0 auto; width: 480px; border: 1px solid #ebebeb; padding: 15px; border-radius: 5px;"
     );
 
+    function fnFormFieldValidation(name, value) {
+        if (!name) return
+        var inputEle = form.querySelector('input[name="' + name + '"]');
+        if (!inputEle) return
+
+        var formControl = inputEle.parentElement;
+        var label = formControl.querySelector("label");
+        var labelText = label.innerText;
+        var isValid = true, message = 'Error message';
+        if (!value) {
+            isValid = false;
+            message = `${labelText} is required`;
+        } else {
+            switch (name) {
+                case "CardNumber":
+                    if (!/^\d{16}$/.test(value)) {
+                        isValid = false;
+                        message = "Card Number is invalid";
+                    }
+                    break;
+                case "CardExpires":
+                    if (!/^\d{4}$/.test(value)) {
+                        isValid = false;
+                        message = "Card Expires is invalid";
+                    }
+                    isValid = true;
+                    break;
+                case "CardVerifyCodeName":
+                    isValid = true;
+                    break;
+            }
+        }
+
+        if (isValid) {
+            formControl.className = "aldelo-epay-form-group success";
+            var small = formControl.querySelector("small");
+            small.innerText = "";
+        } else {
+            formControl.className = "aldelo-epay-form-group error";
+            var small = formControl.querySelector("small");
+            small.innerText = `*${message}`
+        }
+        return isValid;
+    }
+
+    // function fnFormFieldsValidation 
+
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
         var data = new FormData(form);
+        var cardNumber = data.get('CardNumber'),
+            cardExpires = data.get('CardExpires'),
+            cardVerifyCodeName = data.get('CardVerifyCodeName');
+
+        var aaa = fnFormFieldValidation("CardNumber", cardNumber);
+        // debugger
+        if(!fnFormFieldValidation("CardNumber", cardNumber)) return false;
+        if(!fnFormFieldValidation("CardExpires", cardExpires)) return false;
+        if(!fnFormFieldValidation("CardVerifyCodeName", cardVerifyCodeName)) return false;
+
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '$$SubmitUrl$$', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -21,7 +78,7 @@ function createAldeloEPayPaymentForm() {
             amount: data.get('Amount'),
             cardNumber: data.get('CardNumber'),
             cardExpires: data.get('CardExpires'),
-            cardVerifyCode: data.get('CardVeifyCodeName'),
+            cardVerifyCode: data.get('CardVerifyCodeName'),
             // billingZipCode: data.get('billingZipCode'),
         }));
         xhr.onreadystatechange = function () {
@@ -64,7 +121,7 @@ function createAldeloEPayPaymentForm() {
 
     // formRowContainer.appendChild(tokenInput);
     form.appendChild(tokenInput);
-    
+
     function newFormRowContainer(opts = {}) {
         if (!opts.name) return
 
@@ -82,7 +139,7 @@ function createAldeloEPayPaymentForm() {
 
         var rInput = document.createElement("input");
         rInput.setAttribute("type", optsType);
-        rInput.setAttribute("name", "CardNumber");
+        rInput.setAttribute("name", opts.name);
         // rInput.setAttribute("style", "padding: 10px; width: 90%; border: 1px solid #ddd; border-radius: 5px;");
         rInput.setAttribute("autoComplete", "off");
         rInput.setAttribute("placeholder", opts.isRequired ? "Required" : "Optional");
@@ -91,8 +148,7 @@ function createAldeloEPayPaymentForm() {
 
         var rSmall = document.createElement("small");
         rSmall.setAttribute("class", "aldelo-epay-small");
-        rSmall.innerText = opts.error ?? "*error message*";
-        rSmall.setAttribute("style", "color: red; margin-top: 5px;");
+        rSmall.innerText = opts.error;
 
         var rSmallContainer = document.createElement("div");
         rSmallContainer.setAttribute("style", "width: 100%; padding-left: 3px;text-align: left;");
@@ -105,7 +161,7 @@ function createAldeloEPayPaymentForm() {
 
     form.appendChild(newFormRowContainer({ name: "CardNumber", label: 'Card Number', type: "text", isRequired: true, error: "*Card Number is required" }));
     form.appendChild(newFormRowContainer({ name: "CardExpires", label: 'Card Expires', type: "text", isRequired: true, error: "*Card Expires is required" }));
-    form.appendChild(newFormRowContainer({ name: "CardVeifyCodeName", label: 'Card Verify Code(CVV)', type: "text", isRequired: true, error: "*Card Verify Code(CVV) is required" }));
+    form.appendChild(newFormRowContainer({ name: "CardVerifyCodeName", label: 'Card Verify Code(CVV)', type: "text", isRequired: true, error: "*Card Verify Code(CVV) is required" }));
 
     // 创建提交按钮
     var submitButton = document.createElement("input");
