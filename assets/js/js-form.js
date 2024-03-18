@@ -65,7 +65,7 @@ function createForm() {
     var redirectButton = document.createElement("input");  
     redirectButton.setAttribute("type", "button");  
     redirectButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
-    redirectButton.setAttribute("value", "Aldelo ePay(Redirect)");  
+    redirectButton.setAttribute("value", "Aldelo ePay (Redirect)");  
     // redirectButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
     redirectButton.setAttribute("onclick", "redirectToPay()"); 
   
@@ -80,7 +80,7 @@ function createForm() {
     var popupButton = document.createElement("input");  
     popupButton.setAttribute("type", "button");  
     popupButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
-    popupButton.setAttribute("value", "Aldelo ePay(Popup Window)");  
+    popupButton.setAttribute("value", "Aldelo ePay (Popup Window)");  
     // popupButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
     popupButton.setAttribute("onclick", "popupToPay()"); 
   
