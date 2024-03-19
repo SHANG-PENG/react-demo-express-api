@@ -13,29 +13,29 @@ function createForm() {
     var formRowContainer = document.createElement("div"); 
     formRowContainer.setAttribute("class", "epay-form-group");
 
-    var merchantIDInput = document.createElement("input");  
-    merchantIDInput.setAttribute("type", "text");  
-    merchantIDInput.setAttribute("name", "name");  
-    merchantIDInput.setAttribute("autoComplete", "off");  
-    merchantIDInput.setAttribute("placeholder", "Merchant ID");  
-    merchantIDInput.setAttribute("disabled", "true");
-    merchantIDInput.setAttribute("value", "72515C36-79A7-484B-B519-DFA80CB18A40");
+    // var merchantIDInput = document.createElement("input");  
+    // merchantIDInput.setAttribute("type", "text");  
+    // merchantIDInput.setAttribute("name", "name");  
+    // merchantIDInput.setAttribute("autoComplete", "off");  
+    // merchantIDInput.setAttribute("placeholder", "Merchant ID");  
+    // merchantIDInput.setAttribute("disabled", "true");
+    // merchantIDInput.setAttribute("value", "72515C36-79A7-484B-B519-DFA80CB18A40");
   
-    formRowContainer.appendChild(merchantIDInput)
-    form.appendChild(formRowContainer);  
+    // formRowContainer.appendChild(merchantIDInput)
+    // form.appendChild(formRowContainer);  
 
-    var deviceIDInput = document.createElement("input");  
-    deviceIDInput.setAttribute("type", "text");  
-    deviceIDInput.setAttribute("name", "deviceID");  
-    deviceIDInput.setAttribute("autoComplete", "off");  
-    deviceIDInput.setAttribute("placeholder", "Device ID");  
-    deviceIDInput.setAttribute("disabled", "true");
-    deviceIDInput.setAttribute("value", "94EC52BE-DB23-4F89-9254-FDDE201A68C0");
+    // var deviceIDInput = document.createElement("input");  
+    // deviceIDInput.setAttribute("type", "text");  
+    // deviceIDInput.setAttribute("name", "deviceID");  
+    // deviceIDInput.setAttribute("autoComplete", "off");  
+    // deviceIDInput.setAttribute("placeholder", "Device ID");  
+    // deviceIDInput.setAttribute("disabled", "true");
+    // deviceIDInput.setAttribute("value", "94EC52BE-DB23-4F89-9254-FDDE201A68C0");
     
-    formRowContainer = document.createElement("div");  
-    formRowContainer.setAttribute("class", "epay-form-group");
-    formRowContainer.appendChild(deviceIDInput)
-    form.appendChild(formRowContainer);  
+    // formRowContainer = document.createElement("div");  
+    // formRowContainer.setAttribute("class", "epay-form-group");
+    // formRowContainer.appendChild(deviceIDInput)
+    // form.appendChild(formRowContainer);  
 
     // var emailInput = document.createElement("input");  
     // emailInput.setAttribute("type", "email");  
