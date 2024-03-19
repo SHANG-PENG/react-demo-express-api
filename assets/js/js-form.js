@@ -67,7 +67,7 @@ function createForm() {
     redirectButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
     redirectButton.setAttribute("value", "Aldelo ePay (Redirect)");  
     // redirectButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
-    redirectButton.setAttribute("onclick", "redirectToPay()"); 
+    redirectButton.setAttribute("onclick", "redirectToPay($$gid$$, $$id$$)"); 
   
     formRowContainer = document.createElement("div");  
     formRowContainer.setAttribute("class", "epay-form-group");
@@ -82,7 +82,7 @@ function createForm() {
     popupButton.setAttribute("style", "margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;");
     popupButton.setAttribute("value", "Aldelo ePay (Popup Window)");  
     // popupButton.setAttribute("onclick", "window.open('https://dev-epay.aldelo.cloud', '_blank')");
-    popupButton.setAttribute("onclick", "popupToPay()"); 
+    popupButton.setAttribute("onclick", "popupToPay($$gid$$, $$id$$)"); 
   
     formRowContainer = document.createElement("div");  
     formRowContainer.setAttribute("class", "epay-form-group");
@@ -109,8 +109,14 @@ function createForm() {
     var container = document.getElementById("form-container");  
     container.setAttribute("class", "container");
     if (container) {  
-        // 将表单添加到容器中  
-        container.appendChild(form);  
+        var amountTitle = document.createElement("h2");
+        amountTitle.innerText = "Amount: $$Amount$$";
+        formRowContainer = document.createElement("div");
+        formRowContainer.setAttribute("class", "aldelo-epay-form-group");
+        formRowContainer.appendChild(amountTitle);
+        container.appendChild(formRowContainer);
+
+        container.appendChild(form);
     } else {  
         console.error("Container element not found!");  
     }  
