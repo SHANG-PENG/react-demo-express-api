@@ -16,7 +16,7 @@ router.get('/load-form', (req, res) => {
     const referer = req.headers.referer
     console.log('referer', referer)
     const submitBaseUrl = 'http://localhost:8080'
-    if (referer.indexOf('localhost') === -1) {
+    if (referer?.indexOf('localhost') === -1) {
         submitBaseUrl = 'https://react-demo-express-api.vercel.app'
     }
     // 2). 返回支付表单脚本
