@@ -12,6 +12,7 @@ const allowedOrigins = [
     "http://localhost:8080",
     "http://localhost:8001",
     "http://localhost:8002",
+    "http://127.0.0.1:8080",
     "https://react-demo-merchant.vercel.app",
     "https://react-demo-express-api.vercel.app",
     "https://go-ms-apgs-payment-form-git-dev-aldelo.vercel.app"
