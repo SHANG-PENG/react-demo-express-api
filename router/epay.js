@@ -32,10 +32,12 @@ router.get('/load-form', (req, res) => {
             res.set('Content-Type', 'application/javascript');
 
             // 根据 id 从数据库或者通过获取金额
-            getTransactionAmount(id, (err, amount) => {
-                var nData = data.replace(/\$\$Amount\$\$/g, `$${amount}.00`).replace(/\$\$SubmitUrl\$\$/g, `${submitBaseUrl}/api/epay/submit-form`)
-                res.send(nData); // 发送脚本内容  
-            });
+            // getTransactionAmount(id, (err, amount) => {
+            //     var nData = data.replace(/\$\$Amount\$\$/g, `$${amount}.00`).replace(/\$\$SubmitUrl\$\$/g, `${submitBaseUrl}/api/epay/submit-form`)
+            //     res.send(nData); // 发送脚本内容  
+            // });
+            var nData = data.replace(/\$\$Amount\$\$/g, `$${999}.00`).replace(/\$\$SubmitUrl\$\$/g, `${submitBaseUrl}/api/epay/submit-form`)
+            res.send(nData); // 发送脚本内容  
         });
     } catch (error) {
         console.log('error', error)
