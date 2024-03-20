@@ -11,7 +11,7 @@ var getTransactionAmount = require('../db/amount').getTransactionAmount;
 // ToDo Payment Form 加载失败的问题
 
 router.get('/load-form', (req, res) => {
-    const { gid, id } = req.query;
+    // const { gid, id } = req.query;
     // 1). 根据这个 gid 获取基本信息 & 做校验
 
     // const referer = req.headers.referer;
@@ -21,8 +21,9 @@ router.get('/load-form', (req, res) => {
         var submitBaseUrl = 'https://react-demo-express-api.vercel.app'
 
         // 2). 返回支付表单脚本
-        const scriptPath = path.join(__dirname, '../assets/js/payment-form.js');
-        console.log('500 - scriptPath: ', scriptPath)
+        // const scriptPath = path.join(__dirname, '../assets/js/payment-form.js');
+        // console.log('500 - scriptPath: ', scriptPath)
+        console.log('500 - ok')
         // fs.readFile(scriptPath, 'utf8', (err, data) => {
         //     if (err) {
         //         console.error(`Error reading script file: ${err}`);
