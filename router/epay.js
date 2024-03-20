@@ -13,8 +13,8 @@ var getTransactionAmount = require('../db/amount').getTransactionAmount;
 router.get('/load-form', (req, res) => {
     const { gid, id } = req.query;
     // 1). 根据这个 gid 获取基本信息 & 做校验
-    console.log('req', req)
-    const referer = req.referer
+    const referer = req.headers.referer
+    console.log('referer', referer)
     const submitBaseUrl = 'http://localhost:8080'
     if (referer.indexOf('localhost') === -1) {
         submitBaseUrl = 'https://react-demo-express-api.vercel.app'
