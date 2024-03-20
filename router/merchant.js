@@ -102,11 +102,11 @@ router.get('/load-form', (req, res) => {
     });
 });
 
-route.post('/post-order', (req, res) => {
+router.post('/post-order', (req, res) => {
     const jsonData = req.body;
     console.log('post-order: ', jsonData);
     const amount = jsonData.amount;
-    
+
     insertTransaction(amount, (err, id) => {
         if (err) {
             console.error(`Error inserting transaction: ${err}`);
