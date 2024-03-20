@@ -13,10 +13,10 @@ var getTransactionAmount = require('../db/amount').getTransactionAmount;
 router.get('/load-form', (req, res) => {
     const { gid, id } = req.query;
     // 1). 根据这个 gid 获取基本信息 & 做校验
-    const referer = req.headers.referer
-    console.log('referer', referer)
-    const submitBaseUrl = 'http://localhost:8080'
+    const referer = req.headers.referer;
+    
     try {
+        var  submitBaseUrl = 'http://localhost:8080'
         // if (referer && referer.indexOf('localhost') === -1) {
         if (referer !== 'http://localhost:8080') {
             submitBaseUrl = 'https://react-demo-express-api.vercel.app'
@@ -36,7 +36,6 @@ router.get('/load-form', (req, res) => {
                 var nData = data.replace(/\$\$Amount\$\$/g, `$${amount}.00`).replace(/\$\$SubmitUrl\$\$/g, `${submitBaseUrl}/api/epay/submit-form`)
                 res.send(nData); // 发送脚本内容  
             });
-            res.send(data)
         });
     } catch (error) {
         console.log('error', error)
