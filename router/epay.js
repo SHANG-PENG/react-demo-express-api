@@ -8,10 +8,17 @@ var privateDecrypt = require('../common/rsa').privateDecrypt;
 var { getRandomInt } = require('../common/utility');
 var getTransactionAmount = require('../db/amount').getTransactionAmount;
 
+// ToDo Payment Form 加载失败的问题
+
 router.get('/load-form', (req, res) => {
     const { gid, id } = req.query;
     // 1). 根据这个 gid 获取基本信息 & 做校验
-    
+    console.log('req', req)
+    const referer = req.referer
+    const submitBaseUrl = 'http://localhost:8080'
+    if (referer.indexOf('localhost') === -1) {
+        submitBaseUrl = 'https://react-demo-express-api.vercel.app'
+    }
     // 2). 返回支付表单脚本
     const scriptPath = path.join(__dirname, '../assets/js/payment-form.js');
 
@@ -22,9 +29,9 @@ router.get('/load-form', (req, res) => {
         }
         res.set('Content-Type', 'application/javascript');
 
-        // 根据 id 从数据库获取金额
+        // 根据 id 从数据库或者通过获取金额
         getTransactionAmount(id, (err, amount) => {
-            var nData = data.replace('$$Amount$$', `$${amount}.00`).replace('$$SubmitUrl$$', 'http://localhost:8080/api/epay/submit-form')
+            var nData = data.replace(/\$\$Amount\$\$/g, `$${amount}.00`).replace(/\$\$SubmitUrl\$\$/g, `${submitBaseUrl}/api/epay/submit-form`)
             res.send(nData); // 发送脚本内容  
         });
     });
