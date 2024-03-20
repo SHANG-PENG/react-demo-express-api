@@ -127,8 +127,10 @@ function createAldeloEPayPaymentForm() {
         })  
         .then(response => response.json())  
         .then(data => {
-
             console.log(data)
+            if(typeof successCallback === 'function') {
+                successCallback()
+            }
         })  
         .catch(error => console.error('Error:', error));  
 

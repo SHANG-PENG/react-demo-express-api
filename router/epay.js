@@ -53,7 +53,9 @@ router.post('/submit-form', (req, res) => {
     console.log('submit-form-decrypt: ', data);
 
     // 解密获取基本信息并校验
-    res.send("ok");
+    res.send({
+        status: 'ok'
+    });
 });
 
 module.exports = router
