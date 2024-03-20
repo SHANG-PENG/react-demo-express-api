@@ -102,6 +102,24 @@ router.get('/load-form', (req, res) => {
     });
 });
 
+route.post('/post-order', (req, res) => {
+    const jsonData = req.body;
+    console.log('post-order: ', jsonData);
+    const amount = jsonData.amount;
+    
+    insertTransaction(amount, (err, id) => {
+        if (err) {
+            console.error(`Error inserting transaction: ${err}`);
+            return res.status(500).send('Internal Server Error');
+        }
+        console.log(`Transaction inserted with id: ${id}`);
+        res.send({
+            id,
+            amount,
+        });
+    });
+})
+
 router.post('/submit-form', (req, res) => {
     const jsonData = req.body;
     console.log('submit-form: ', jsonData);
