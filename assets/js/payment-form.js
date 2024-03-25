@@ -33,6 +33,43 @@ rzSovwKBgHu3EQ8jfNwaE5Q1+ypnvWOM5yTuDhrV2+tPaYMfxLUSq1Tx+nw1BvhV
 /iNB1RBLnd2BAWoyze1OXU6l6j6Tozgd/R4zcMN5KdC1QJKuWtfZHREjBIx8uZce
 ZMbpselV5TudhrbwnXDALlfXJmsWnsTwvnMrab/SI+DnkSuFvy8/`
 
+function loadScript(url, callback) {
+    var scripts = document.getElementsByTagName("script");
+    for (var i = 0; i < scripts.length; i++) {
+        if (scripts[i].src == url) {
+            if (typeof callback === 'function') {
+                callback();
+            }
+            return;
+        }
+    }
+
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+
+    if (script.readyState) {
+      script.onreadystatechange = function () {
+        if (script.readyState == "loaded" || script.readyState == "complete") {
+          script.onreadystatechange = null;
+
+          if (typeof callback === 'function') {
+            callback();
+          }
+        }
+      };
+    } else {  //Others  
+      script.onload = function () {
+        if (typeof callback === 'function') {
+          callback();
+        }
+      };
+    }
+
+    script.src = url;
+    document.body.appendChild(script);
+  }
+
+
 function createAldeloEPayPaymentForm() {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
@@ -93,23 +130,23 @@ function createAldeloEPayPaymentForm() {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        const formData = new FormData(form);  
-        const dataToEncrypt = {};  
-        for (const [key, value] of formData.entries()) {  
-            dataToEncrypt[key] = value;  
-        }  
+        const formData = new FormData(form);
+        const dataToEncrypt = {};
+        for (const [key, value] of formData.entries()) {
+            dataToEncrypt[key] = value;
+        }
         var cardNumber = formData.get('CardNumber'),
             cardExpires = formData.get('CardExpires'),
             cardVerifyCodeName = formData.get('CardVerifyCodeName');
 
-            const encrypt = new JSEncrypt();  
-            encrypt.setPublicKey(pk);  
-            const encrypted = encrypt.encrypt(JSON.stringify(dataToEncrypt)); 
+        const encrypt = new JSEncrypt();
+        encrypt.setPublicKey(pk);
+        const encrypted = encrypt.encrypt(JSON.stringify(dataToEncrypt));
 
         // debugger
-        if(!fnFormFieldValidation("CardNumber", cardNumber)) return false;
-        if(!fnFormFieldValidation("CardExpires", cardExpires)) return false;
-        if(!fnFormFieldValidation("CardVerifyCodeName", cardVerifyCodeName)) return false;
+        if (!fnFormFieldValidation("CardNumber", cardNumber)) return false;
+        if (!fnFormFieldValidation("CardExpires", cardExpires)) return false;
+        if (!fnFormFieldValidation("CardVerifyCodeName", cardVerifyCodeName)) return false;
 
         console.log('encrypted:', encrypted)
 
@@ -118,21 +155,26 @@ function createAldeloEPayPaymentForm() {
         const decrypted = des.decrypt(encrypted);
         console.log('decrypted:', decrypted)
 
-        fetch('$$SubmitUrl$$', {  
-            method: 'POST',  
-            headers: {  
-                'Content-Type': 'application/json'  
-            },  
-            body: JSON.stringify({ data: encrypted })  
-        })  
-        .then(response => response.json())  
-        .then(data => {
-            console.log(data)
-            if(typeof successCallback === 'function') {
-                successCallback()
-            }
-        })  
-        .catch(error => console.error('Error:', error));  
+        fetch('$$SubmitUrl$$', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: encrypted })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (typeof ePayHandler === 'function') {
+                    ePayHandler({ type: 'payment', code: 200, data: data })
+                }
+            })
+            .catch(error => {
+                if (typeof ePayHandler === 'function') {
+                    ePayHandler({ type: 'payment', data: { error: error } })
+                }
+                console.error('Error:', error)
+            });
 
 
         // var xhr = new XMLHttpRequest();
@@ -233,6 +275,11 @@ function createAldeloEPayPaymentForm() {
     var container = document.getElementById("aldelo-epay-form-container");
     container.setAttribute("class", "container");
     if (container) {
+        var forms = container.getElementsByTagName("form");
+        if(forms.length > 0) {
+            // generate new form
+            container.replaceChildren("")
+        }
         var amountTitle = document.createElement("h2");
         amountTitle.innerText = "Amount: $$Amount$$";
         formRowContainer = document.createElement("div");
