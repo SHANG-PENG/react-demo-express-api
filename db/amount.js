@@ -7,7 +7,7 @@ const getTransactionAmount = (id, callback) => {
             console.error(`Error getting amount: ${err}`);
             return callback(err);
         }
-        callback(null, row.amount);
+        callback(null, row?.amount || 0);
     });
 }
 
