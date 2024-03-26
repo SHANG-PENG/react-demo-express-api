@@ -185,7 +185,6 @@ function createEPayPaymentForm() {
     form.appendChild(newFormRowContainer({ name: "CardExpires", label: 'Card Expires', type: "text", isRequired: true, error: "*Card Expires is required" }));
     form.appendChild(newFormRowContainer({ name: "CardVerifyCode", label: 'Card Verify Code(CVV)', type: "text", isRequired: true, error: "*Card Verify Code(CVV) is required" }));
 
-    // 创建提交按钮
     var submitButton = document.createElement("input");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute(
@@ -210,6 +209,93 @@ function createEPayPaymentForm() {
         }
 
         container.appendChild(form);
+        
+        // add form style
+        var style = document.createElement('style');
+        style.type = 'text/css';
+
+        var cssContent = document.createTextNode(`
+    /* aldelo epay form */
+    .aldelo-epay-form-container {
+        margin: 10px auto;
+    }
+
+    .aldelo-epay-form {
+        width: 560px;
+        margin: 0 auto;
+        padding: 15px;
+        border: 1px solid #ebebeb;
+        border-radius: 5px;
+    }
+
+    .aldelo-epay-form-group {
+        min-height: 48px;
+        margin: 0 auto;
+    }
+
+    .aldelo-epay-form-group label {
+        text-align: left;
+        padding-left: .5rem;
+        font-size: .9rem;
+        font-weight: 600;
+    }
+
+    .aldelo-epay-form-group input {
+        width: 90%;
+        height: 42px;
+        padding: 0 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .aldelo-epay-form-group input[type="button"] {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        width: 95%;
+        border-radius: 5px;
+    }
+
+    .aldelo-epay-form-group input[type="submit"] {
+        margin-top: 0.25rem;
+    }
+
+    .aldelo-epay-form-group small {
+        width: 100%;
+        position: relative;
+        left: 0;
+        bottom: 0;
+        visibility: hidden;
+        padding-left: 3px;
+        color: #e74c3c;
+    }
+
+    .aldelo-epay-form-group.success input {
+        border: 1px solid #2ecc71;
+    }
+
+    .aldelo-epay-form-group.error input {
+        border-color: #e74c3c;
+    }
+
+    .aldelo-epay-form-group.success small {
+        visibility: hidden;
+    }
+
+    .aldelo-epay-form-group.error small {
+        visibility: visible;
+    }
+
+    /* aldelo epay form */`
+    );
+        style.appendChild(cssContent);
+    
+        document.head.appendChild(style);
+
     } else {
         console.error("Container element not found!");
     }
