@@ -26,16 +26,25 @@ router.get('/load-form', (req, res) => {
         // 2). 返回支付表单脚本
         const scriptPath = path.join(__dirname, '../assets/js/payment-form.js');
 
+        const pk = `-----BEGIN PUBLIC KEY-----
+        MIIBCgKCAQEAx4FzgLG9gR1CPKIqHlQ9zQPhGgf1KA9kIadngwvh+XelU2XGWX0R
+        Rgqw0xkx76I+Hj79QydCTEWPqGqP0hn2SrBYfvr2TKAFbFZP1r28bpI/pXTyuBWC
+        a2c5fNp40cQDx567aJ2YFcVc0i/TIh0tBVMENeOWujerKCa/Agao2Me4IJW69olY
+        MBBIScupEivF1dBc9hSS/LdPpWJ1fhgFvnWMY7Eozwdm5ccwRkI9wQAaD8pskgwu
+        l8e29UYvlmCa4MD8fgHK83j7YKitjEkgvgXneaEb/Q0tAk3HNucbYZYjU19NdFUO
+        6Wmar8q4dnNRPqtBJOh1yKLSUZP1AaMz5wIDAQAB
+        -----END PUBLIC KEY-----`
+
         fs.readFile(scriptPath, 'utf8', (err, data) => {
             if (err) {
                 console.error(`Error reading script file: ${err}`);
                 return res.status(500).send(`Internal Server Error: ${err}, ${scriptPath}`);
             }
             res.set('Content-Type', 'application/javascript');
-
+            
             // 根据 id 从数据库或者通过获取金额
             getTransactionAmount(id, (err, amount) => {
-                var nData = data.replace(/\$\$Amount\$\$/g, `$${amount}.00`).replace(/\$\$SubmitUrl\$\$/g, `${submitBaseUrl}/api/epay/submit-form`)
+                var nData = data.replace(/\$\$PK\$\$/g, pk).replace(/\$\$Amount\$\$/g, `$${amount}.00`).replace(/\$\$SubmitUrl\$\$/g, `${submitBaseUrl}/api/epay/submit-form`)
                 res.send(nData); // 发送脚本内容  
             });
         });
