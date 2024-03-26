@@ -5,11 +5,11 @@ var router = express.Router()
 
 var NodeRSA = require('node-rsa');
 
-var { getRandomInt } = require('../common/utility');
+const { getRandomInt } = require('../common/utility');
 const { insertTransaction } = require('../db/amount');
+const { publicKey } = require('../config/keys');
 
-
-router.get('/load-form', (req, res) => {
+router.get('/load-form2', (req, res) => {
     const { a } = req.query;
     const scriptPath = path.join(__dirname, '../assets/js/js-form.js'); // 替换为你的脚本文件的路径  
 
@@ -100,6 +100,34 @@ router.get('/load-form', (req, res) => {
             });
         }
     });
+});
+
+router.get('/getjs', (req, res) => {
+    const { id, sign } = req.query;
+    // 1). 根据这个 gid 获取基本信息 & 做校验
+
+    const { referer, host } = req.headers;
+    console.log('referer: ', referer);
+    console.log('host: ', host)
+
+    try {
+        // 2). 返回支付表单脚本
+        const scriptPath = path.join(__dirname, '../assets/js/merchant-form.js');
+
+        fs.readFile(scriptPath, 'utf8', (err, data) => {
+            if (err) {
+                console.error(`Error reading script file: ${err}`);
+                return res.status(500).send(`Internal Server Error: ${err}, ${scriptPath}`);
+            }
+            res.set('Content-Type', 'application/javascript');
+
+            var nData = data.replace(/\$\$PK\$\$/g, publicKey)
+            res.send(nData); // 发送脚本内容  
+        });
+    } catch (error) {
+        console.log('error', error)
+        res.send(error)
+    }
 });
 
 router.post('/post-order', (req, res) => {

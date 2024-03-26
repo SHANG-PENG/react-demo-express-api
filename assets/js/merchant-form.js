@@ -201,19 +201,13 @@ function createEPayPaymentForm() {
     form.appendChild(formRowContainer);
 
     var container = document.getElementById("aldelo-epay-form-container");
-    container.setAttribute("class", "container");
+    container.setAttribute("class", "aldelo-epay-form-container");
     if (container) {
         var forms = container.getElementsByTagName("form");
         if (forms.length > 0) {
             // generate new form
             container.replaceChildren("")
         }
-        var amountTitle = document.createElement("h2");
-        amountTitle.innerText = "Amount: $$Amount$$";
-        formRowContainer = document.createElement("div");
-        formRowContainer.setAttribute("class", "aldelo-epay-form-group");
-        formRowContainer.appendChild(amountTitle);
-        container.appendChild(formRowContainer);
 
         container.appendChild(form);
     } else {
