@@ -150,11 +150,6 @@ function createAldeloEPayPaymentForm() {
 
         console.log('encrypted:', encrypted)
 
-        const des = new JSEncrypt();
-        encrypt.setPrivateKey(pk2);
-        const decrypted = des.decrypt(encrypted);
-        console.log('decrypted:', decrypted)
-
         fetch('$$SubmitUrl$$', {
             method: 'POST',
             headers: {
