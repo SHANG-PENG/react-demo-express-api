@@ -144,6 +144,20 @@
     form.appendChild(newFormRowContainer({ name: "CardExpires", label: "Card Expires", type: "text", isRequired: true, error: "*Card Expires is required" }));
     form.appendChild(newFormRowContainer({ name: "CardVerifyCode", label: "Card Verify Code(CVV)", type: "text", isRequired: true, error: "*Card Verify Code(CVV) is required" }));
 
+    var submitButton = document.createElement("input");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute(
+        "style",
+        "padding: 10px; background-color: #000; color: #fff; border: none; cursor: pointer; width: 95%; border-radius: 5px;"
+    );
+    submitButton.setAttribute("value", "Pay");
+
+    formRowContainer = document.createElement("div");
+    formRowContainer.setAttribute("class", "aldelo-epay-form-group");
+
+    formRowContainer.appendChild(submitButton);
+    form.appendChild(formRowContainer);
+
     var container = document.getElementById("aldelo-epay-form-container");
     container.setAttribute("class", "aldelo-epay-form-container");
     if (container) {
