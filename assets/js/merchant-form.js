@@ -30,7 +30,7 @@ function fnAttachFieldsToForm() {
 
     const fieldOpts = [
         { containerId: "epay-card-number", name: "cardNumber", type: "text", placeholder: "Card Number" },
-        { containerId: "epay-card-expires", name: "cardExpires", type: "text", placeholder: "Card Expires (MM/YY)" },
+        { containerId: "epay-card-expires", name: "cardExpires", type: "text", placeholder: "Card Expires (YYYYMMDD)" },
         { containerId: "epay-card-verify-code", name: "cardVerifyCode", type: "text", placeholder: "Card Verify Code (CVV)" }
     ];
 
