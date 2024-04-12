@@ -1,4 +1,4 @@
-window.onload = function () {
+(function () {
   var obj = new Object();
   obj.code = "$$ErrorCode$$";
   obj.message = "$$ErrorMessage$$";
@@ -6,5 +6,5 @@ window.onload = function () {
     if (typeof ePayHandler === "function") {
       ePayHandler(obj);
     }
-  } catch (e) {}
-};
+  } catch (e) { }
+})();
