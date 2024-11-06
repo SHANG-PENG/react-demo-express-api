@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 
+var cspRouter = require('./router/csp');
 var epayRouter = require('./router/epay');
 var merchantRouter = require('./router/merchant');
 
@@ -41,11 +42,12 @@ app.get('/', (req, res) => {
     res.send('hello');
 });
 
+app.use('/api/csp', cspRouter);
 app.use('/api/epay', epayRouter);
 app.use('/api/merchant', merchantRouter);
 
 // 服务端口号
-const port = 8080;
+const port = 3000;
 // 监听端口号
 app.listen(port, () => {
     console.log(`node服务已启动 端口号为： ${port}`);
