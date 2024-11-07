@@ -1,7 +1,9 @@
 var express = require('express');
+const bodyParser = require('body-parser');
 var app = express();
 
 app.use(express.json());
+app.use(bodyParser.json());
 
 // 处理 GET 请求 / 返回 hello 
 app.get('/', (req, res) => {
@@ -10,9 +12,15 @@ app.get('/', (req, res) => {
 
 app.post('/csp-report', (req, res) => {
     const body = req.body;
-    console.log('csp-report body: ', body)
-    res.status(200).send(body);
+    console.log('CSP Violation Report:', req.body['csp-report']);
+    res.sendStatus(204); // 返回 204 No Content
 });
+
+// app.post('/csp-violation-report-endpoint', (req, res) => {
+//   console.log('CSP Violation Report:', req.body['csp-report']);
+//   // 这里可以将报告存储到数据库或日志文件中
+//   res.sendStatus(204); // 返回 204 No Content
+// });
 
 // 服务端口号
 const port = 3000;
