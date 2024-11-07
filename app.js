@@ -10,8 +10,8 @@ app.get('/', (req, res) => {
 
 app.post('/csp-report', (req, res) => {
     const body = req.body;
-    console.log('csp-report body: ', JSON.stringify(body))
-    res.status(200).send(JSON.stringify(body));
+    console.log('csp-report body: ', body)
+    res.status(200).send(body);
 });
 
 // 服务端口号
