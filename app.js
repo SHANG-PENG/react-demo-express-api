@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
 app.post('/csp-report', (req, res) => {
     const body = req.body;
     console.log('CSP Violation Report:', req.body['csp-report']);
+    res.setHeader('Content-Type', 'application/csp-report'); 
     res.status(200).send(body);
 });
 
